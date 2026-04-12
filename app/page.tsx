@@ -5,16 +5,16 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <main className="bg-[#f6f3ee] min-h-screen font-sans overflow-hidden">
+    <main className="bg-[#f6f3ee] min-h-screen font-sans flex flex-col">
       
       {/* NAVBAR */}
       <motion.header
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="flex justify-between items-center px-6 md:px-10 py-5 bg-white shadow-sm"
+        className="flex justify-between items-center px-10 md:px-20 py-5 bg-white shadow-sm"
       >
-        <div className="text-lg md:text-xl font-bold text-green-700">
+        <div className="text-lg md:text-xl font-bold text-green-800">
           COWCARE
         </div>
 
@@ -25,13 +25,16 @@ export default function Home() {
           <a href="#">Blog</a>
         </nav>
 
-        <button className="bg-green-700 text-white px-4 md:px-5 py-2 rounded-md text-sm md:text-base">
+        <button className="flex items-center gap-2 bg-green-800 text-white px-4 md:px-5 py-2 rounded-md text-sm md:text-base">
           Sign In
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
         </button>
       </motion.header>
 
       {/* HERO */}
-      <section className="grid md:grid-cols-2 items-center px-6 md:px-10 py-12 md:py-16 gap-10">
+      <section className="flex-1 grid md:grid-cols-2 items-center px-10 md:px-20 py-12 md:py-16 gap-10">
         
         {/* LEFT TEXT */}
         <motion.div
@@ -50,16 +53,14 @@ export default function Home() {
 
           {/* BUTTONS */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6 md:mt-8">
-            <button className="flex items-center justify-center gap-2 bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-full w-full sm:w-auto transition-colors shadow-md">
-              {/* Cart icon */}
+            <button className="flex items-center justify-center gap-2 bg-green-800 hover:bg-green-900 text-white px-6 py-3 rounded-md w-full sm:w-auto transition-colors shadow-md">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.6 8h13.2M7 13L5.4 5M10 21a1 1 0 100-2 1 1 0 000 2zm7 0a1 1 0 100-2 1 1 0 000 2z" />
               </svg>
               Shop Now
             </button>
 
-            <button className="flex items-center justify-center gap-2 border-2 border-green-700 text-green-700 hover:bg-green-50 px-6 py-3 rounded-full w-full sm:w-auto transition-colors">
-              {/* Info icon */}
+            <button className="flex items-center justify-center gap-2 border-2 border-green-800 text-green-800 hover:bg-green-50 px-6 py-3 rounded-md w-full sm:w-auto transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
               </svg>
@@ -80,7 +81,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.2 }}
               >
-                <h2 className="text-xl md:text-2xl font-bold">
+                <h2 className="text-xl md:text-2xl font-bold text-green-800">
                   {item.value}
                 </h2>
                 <p className="text-gray-500 text-sm">{item.label}</p>
@@ -89,49 +90,54 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* RIGHT IMAGE */}
+        {/* placeholder to keep grid balanced */}
+        <div className="hidden md:block" />
+      </section>
+
+      {/* BOTTOM BANNER + overlapping image wrapper */}
+      <div className="relative">
+
+        {/* COW IMAGE — overlaps hero into banner */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative flex justify-center"
+          className="hidden md:block absolute right-0 z-10" style={{ top: "-40rem" }}
         >
-          <div className="bg-green-200 w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] rounded-full absolute"></div>
-
-          <Image
-            src="/cow.jpg"
-            alt="Cow"
-            width={400}
-            height={400}
-            className="relative z-10 object-contain w-[260px] sm:w-[320px] md:w-[400px]"
-          />
-        </motion.div>
-      </section>
-
-      {/* BOTTOM BANNER */}
-      <motion.section
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="bg-green-700 text-white px-6 md:px-10 py-6 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center text-center md:text-left"
-      >
-        <div className="flex items-center gap-3">
-          <div className="flex -space-x-2">
-            <div className="w-8 h-8 bg-white rounded-full"></div>
-            <div className="w-8 h-8 bg-white rounded-full"></div>
-            <div className="w-8 h-8 bg-white rounded-full"></div>
+          <div
+            className="w-[700px] h-[600px] overflow-hidden"
+            style={{ borderRadius: "55% 45% 60% 40% / 50% 55% 45% 50%" }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/cow.jpg" alt="Cow" className="w-full h-full object-cover" />
           </div>
-          <p className="text-sm md:text-base">Our Happy Clients</p>
-        </div>
+        </motion.div>
 
-        <div className="font-semibold text-sm md:text-base">
-          Healthy Life With Fresh Products
-        </div>
+        {/* BOTTOM BANNER */}
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="bg-green-800 text-white px-10 md:px-20 py-6 flex flex-col md:flex-row gap-4 md:gap-0 justify-between items-center text-center md:text-left"
+        >
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-2">
+              <div className="w-8 h-8 bg-white rounded-full"></div>
+              <div className="w-8 h-8 bg-white rounded-full"></div>
+              <div className="w-8 h-8 bg-white rounded-full"></div>
+            </div>
+            <p className="text-sm md:text-base">Our Happy Clients</p>
+          </div>
 
-        <div className="text-xs md:text-sm opacity-80">
-          Trusted by thousands of farmers
-        </div>
-      </motion.section>
+          <div className="font-semibold text-sm md:text-base">
+            Healthy Life With Fresh Products
+          </div>
+
+          <div className="text-xs md:text-sm opacity-80">
+            Trusted by thousands of farmers
+          </div>
+        </motion.section>
+      </div>
     </main>
   );
 }
