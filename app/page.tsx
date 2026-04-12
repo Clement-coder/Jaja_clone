@@ -94,10 +94,26 @@ export default function Home() {
         <div className="hidden md:block" />
       </section>
 
+      {/* MOBILE IMAGE — visible only below md */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="flex md:hidden justify-center px-6 pb-10"
+      >
+        <div
+          className="w-full max-w-sm h-[300px] overflow-hidden"
+          style={{ borderRadius: "55% 45% 60% 40% / 50% 55% 45% 50%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/cow.jpg" alt="Cow" className="w-full h-full object-cover" />
+        </div>
+      </motion.div>
+
       {/* BOTTOM BANNER + overlapping image wrapper */}
       <div className="relative">
 
-        {/* COW IMAGE — overlaps hero into banner */}
+        {/* COW IMAGE — overlaps hero into banner, desktop only */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
@@ -105,7 +121,7 @@ export default function Home() {
           className="hidden md:block absolute right-0 z-10" style={{ top: "-40rem" }}
         >
           <div
-            className="w-[700px] h-[600px] overflow-hidden"
+            className="w-[min(700px,50vw)] h-[600px] overflow-hidden"
             style={{ borderRadius: "55% 45% 60% 40% / 50% 55% 45% 50%" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
