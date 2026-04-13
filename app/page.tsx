@@ -58,8 +58,8 @@ export default function Home() {
       </header>
 
       {/* ── HERO ── */}
-      <section className="max-w-7xl mx-auto px-6 md:px-16 pt-16 pb-0 grid md:grid-cols-2 items-end gap-10 overflow-hidden">
-        <motion.div {...fadeUp()} className="pb-16">
+      <section className="max-w-7xl mx-auto px-6 md:px-16 pt-16 pb-16 grid md:grid-cols-2 items-center gap-10 overflow-hidden">
+        <motion.div {...fadeUp()} className="pb-0">
           <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-4">
             <Leaf className="w-3.5 h-3.5" /> 100% Organic Feed
           </span>
@@ -97,9 +97,9 @@ export default function Home() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9 }}
-          className="flex justify-center md:justify-end items-end mb-[-4rem]">
-          <div className="w-[80vw] sm:w-[60vw] md:w-full md:max-w-[480px] aspect-[7/6] overflow-hidden"
-            style={{ borderRadius: "55% 45% 60% 40% / 50% 55% 45% 50%" }}>
+          className="flex justify-center md:justify-end items-center">
+          <div className="w-[98vw] sm:w-[85vw] md:w-full md:max-w-[560px] aspect-[4/5] overflow-hidden"
+            style={{ clipPath: "polygon(20% 0%, 80% 5%, 100% 25%, 95% 70%, 75% 100%, 25% 95%, 0% 75%, 5% 30%)", borderRadius: "0 40px 40px 0" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/cow.jpg" alt="Cow" className="w-full h-full object-cover" />
           </div>
@@ -108,7 +108,7 @@ export default function Home() {
 
       {/* ── TRUST BANNER ── */}
       <div className="bg-green-800 text-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-16 pt-20 pb-8 flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-center text-center md:text-left">
+        <div className="max-w-7xl mx-auto px-6 md:px-16 py-8 flex flex-col md:flex-row gap-6 md:gap-0 justify-between items-center text-center md:text-left">
           <div className="flex items-center gap-3">
             <div className="flex -space-x-2">
               {[1,2,3].map(i => <div key={i} className="w-9 h-9 bg-green-600 border-2 border-white rounded-full" />)}
@@ -137,19 +137,26 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             { icon: <Leaf className="w-7 h-7 text-green-700" />, title: "100% Organic", desc: "No chemicals, no additives. Pure natural ingredients sourced from certified farms." },
-            { icon: <TrendingUp className="w-7 h-7 text-green-700" />, title: "Boosts Milk Yield", desc: "Scientifically formulated to increase milk production by up to 25% within weeks." },
-            { icon: <Dumbbell className="w-7 h-7 text-green-700" />, title: "Stronger Cattle", desc: "Rich in minerals and vitamins that improve bone density and overall health." },
+            { icon: <TrendingUp className="w-7 h-7 text-amber-600" />, title: "Boosts Milk Yield", desc: "Scientifically formulated to increase milk production by up to 25% within weeks." },
+            { icon: <Dumbbell className="w-7 h-7 text-sky-600" />, title: "Stronger Cattle", desc: "Rich in minerals and vitamins that improve bone density and overall health." },
             { icon: <Truck className="w-7 h-7 text-green-700" />, title: "Fast Delivery", desc: "Same-day dispatch with nationwide delivery to your farm gate." },
-            { icon: <FlaskConical className="w-7 h-7 text-green-700" />, title: "Lab Tested", desc: "Every batch is tested in certified labs to ensure quality and safety." },
-            { icon: <Recycle className="w-7 h-7 text-green-700" />, title: "Eco Friendly", desc: "Sustainable packaging and carbon-neutral production processes." },
-          ].map((f, i) => (
-            <motion.div key={i} {...fadeUp(i * 0.1)}
-              className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <div className="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4">{f.icon}</div>
-              <h3 className="font-bold text-gray-900 text-lg mb-2">{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
-            </motion.div>
-          ))}
+            { icon: <FlaskConical className="w-7 h-7 text-amber-600" />, title: "Lab Tested", desc: "Every batch is tested in certified labs to ensure quality and safety." },
+            { icon: <Recycle className="w-7 h-7 text-sky-600" />, title: "Eco Friendly", desc: "Sustainable packaging and carbon-neutral production processes." },
+          ].map((f, i) => {
+            const cards = [
+              "bg-green-50 border-green-100",
+              "bg-amber-50 border-amber-100",
+              "bg-sky-50 border-sky-100",
+            ];
+            return (
+              <motion.div key={i} {...fadeUp(i * 0.1)}
+                className={`${cards[i % 3]} rounded-2xl p-7 shadow-sm hover:shadow-md transition-shadow border`}>
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 ${["bg-green-100","bg-amber-100","bg-sky-100"][i%3]}`}>{f.icon}</div>
+                <h3 className="font-bold text-gray-900 text-lg mb-2">{f.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
@@ -202,13 +209,13 @@ export default function Home() {
         </motion.div>
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
           {[
-            { step: "01", icon: <Search className="w-7 h-7 text-green-700" />, title: "Choose Product", desc: "Browse our range of organic feeds." },
-            { step: "02", icon: <ShoppingCart className="w-7 h-7 text-green-700" />, title: "Place Order", desc: "Add to cart and checkout securely." },
-            { step: "03", icon: <Truck className="w-7 h-7 text-green-700" />, title: "Fast Delivery", desc: "We deliver straight to your farm." },
-            { step: "04", icon: <CheckCircle className="w-7 h-7 text-green-700" />, title: "Happy Cattle", desc: "Watch your herd thrive and produce more." },
+            { step: "01", icon: <Search className="w-7 h-7 text-green-700" />, title: "Choose Product", desc: "Browse our range of organic feeds.", color: "bg-green-50", iconBg: "bg-green-100" },
+            { step: "02", icon: <ShoppingCart className="w-7 h-7 text-amber-600" />, title: "Place Order", desc: "Add to cart and checkout securely.", color: "bg-amber-50", iconBg: "bg-amber-100" },
+            { step: "03", icon: <Truck className="w-7 h-7 text-sky-600" />, title: "Fast Delivery", desc: "We deliver straight to your farm.", color: "bg-sky-50", iconBg: "bg-sky-100" },
+            { step: "04", icon: <CheckCircle className="w-7 h-7 text-green-700" />, title: "Happy Cattle", desc: "Watch your herd thrive and produce more.", color: "bg-green-50", iconBg: "bg-green-100" },
           ].map((s, i) => (
-            <motion.div key={i} {...fadeUp(i * 0.1)} className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">{s.icon}</div>
+            <motion.div key={i} {...fadeUp(i * 0.1)} className={`${s.color} rounded-2xl p-6 text-center`}>
+              <div className={`w-16 h-16 ${s.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4`}>{s.icon}</div>
               <div className="text-xs font-bold text-green-800 mb-1">{s.step}</div>
               <h3 className="font-bold text-gray-900 mb-2">{s.title}</h3>
               <p className="text-gray-500 text-sm">{s.desc}</p>
